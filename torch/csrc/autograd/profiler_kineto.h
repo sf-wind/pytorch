@@ -176,6 +176,14 @@ TORCH_API void prepareProfiler(
     const torch::profiler::impl::ProfilerConfig& config,
     const std::set<torch::profiler::impl::ActivityType>& activities);
 
+/*
+ * For multithreading C++, each child thread needs to turn on and off profiler.
+ */
+TORCH_API bool isProfilerEnabledInMainThread();
+TORCH_API void enableProfilerInChildThread();
+TORCH_API void disableProfilerInChildThread();
+
+
 } // namespace autograd::profiler
 
 namespace profiler::impl {
