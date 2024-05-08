@@ -639,8 +639,8 @@ void enableProfiler(
       has_cpu || !config.global(),
       "Ondemand profiling must enable CPU tracing");
 
-  KinetoThreadLocalState::push(
-      std::make_shared<KinetoThreadLocalState>(config, activities));
+  auto state_ptr = std::make_shared<KinetoThreadLocalState>(config, activities);
+  KinetoThreadLocalState::push(state_ptr);
 
   if (has_cpu) {
     config.global() ? pushProfilingCallbacks</*global=*/true>(scopes)
